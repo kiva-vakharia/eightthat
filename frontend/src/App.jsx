@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom";
 import "./App.css";
 
 const beachNames = [
@@ -23,10 +24,14 @@ const beachNames = [
 ];
 
 function App() {
+	const navigate = useNavigate();
+
 	return (
 		<>
 			{beachNames.map((beach) => (
-				<button key={beach}>{beach}</button>
+				<button key={beach} onClick={() => {
+					navigate(`/beach?beach=${beach}`)
+				}}>{beach}</button>
 			))}
 		</>
 	);

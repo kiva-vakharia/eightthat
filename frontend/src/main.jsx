@@ -6,6 +6,7 @@ import {
 	RouterProvider,
   } from "react-router-dom";
 import "./index.css";
+import Beach from "./beach.jsx";
 
 /*
 This code renders our project so it can be viewed in a browser. 
@@ -18,7 +19,7 @@ const router = createBrowserRouter([
 	},
 	{
 		path: "/beach",
-		element: <div> Welcome to the Beach </div>
+		element: <Beach />
 	}
   ]);
 
