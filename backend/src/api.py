@@ -5,6 +5,7 @@ $ fastapi dev src/api.py
 """
 
 import random
+import pysurfline
 
 from fastapi import FastAPI
 
@@ -42,3 +43,10 @@ def read_item(item_id: int, q: str | None = None) -> dict[str, int | str | None]
 def get_random_item() -> dict[str, int]:
     """Get an item with a random ID."""
     return {"item_id": random.randint(0, 1000)}
+
+
+@app.get("/tide-data")
+def get_tides():
+    spotId = "5842041f4e65fad6a7708cfd" # anchor point
+    spotforecasts = pysurfline.get_spot_forecasts(spotId)
+    return spotforecasts.tides
