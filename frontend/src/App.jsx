@@ -1,5 +1,9 @@
 import { useNavigate } from "react-router-dom";
 import "./App.css";
+import testing from "./assets/petrsurf2.gif";
+import sunny from "./assets/sunset.svg";
+import logo2 from "./assets/logocartoon.png";
+import { Navigate } from "react-router-dom";
 
 const beachNames = [
 	"The Wedge",
@@ -28,11 +32,21 @@ function App() {
 
 	return (
 		<>
-			{beachNames.map((beach) => (
-				<button key={beach} onClick={() => {
-					navigate(`/beach?beach=${beach}`)
-				}}>{beach}</button>
-			))}
+			<img src={testing} className="mainthing" />
+			<bounce>
+				<img src={logo2} className="logo"></img>
+			</bounce>
+			<p>Select a beach</p>
+			<select
+				name="beachNames"
+				id="beach"
+				class="dropbtn"
+				onChange={(e) => navigate(`/beach?beach=${e.target.value}`)}
+			>
+				{beachNames.map((beach) => (
+					<option key={beach}> {beach}</option>
+				))}
+			</select>
 		</>
 	);
 }
