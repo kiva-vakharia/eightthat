@@ -64,3 +64,14 @@ def get_tides(beach_name: str):
 def get_weather(beach_name):
     zipcode = get_zip(beach_name)
     return pull_data(zipcode, APIKEY)
+
+
+@app.get("/power")
+def get_wave_power(beach_name, user_time):
+    return beaches.return_power(beach_name, user_time)
+
+
+@app.get("/ranking")
+def get_beach_ranking(beach_name, user_time):
+    return beaches.rank_beach(beach_name, user_time)
+
