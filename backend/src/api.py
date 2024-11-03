@@ -58,26 +58,7 @@ def get_tides(beach_name: str):
     spotforecasts = pysurfline.get_spot_forecasts(spotId)
     return spotforecasts.tides
 
-@app.get("/weather-temps")
-def get_temps(beach_name):
+@app.get("/basic-weather-stats")
+def get_weather(beach_name):
     zipcode = get_zip(beach_name)
-    point = pull_data(zipcode, APIKEY)
-    return point['temp_now'], point['temp_min'], point['temp_max']
-
-@app.get("/sea-level")
-def get_sea_level(beach_name):
-    zipcode = get_zip(beach_name)
-    point = pull_data(zipcode, APIKEY)
-    return point['sea_level']
-
-@app.get("/humidity")
-def get_humidity(beach_name):
-    zipcode = get_zip(beach_name)
-    point = pull_data(zipcode, APIKEY)
-    return point['humidity']
-
-@app.get("/weather-desc")
-def get_weather_description(beach_name):
-    zipcode = get_zip(beach_name)
-    point = pull_data(zipcode, APIKEY)
-    return point['desc']
+    return pull_data(zipcode, APIKEY)
