@@ -97,6 +97,7 @@ def pull_data(zip, key):
     weather.load_data()
     return_obj = {}
     return_obj['city'] = weather.city
+    return_obj['temp_now'] = weather.temperature
     return_obj['temp_min'] = weather.low_temperature
     return_obj['temp_max'] = weather.high_temperature
     return_obj['desc'] = weather.description

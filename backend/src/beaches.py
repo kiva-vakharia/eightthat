@@ -24,6 +24,33 @@ beaches = {
     'HB Cliffs': '640a3f7c606c45fdf1b09880'
      }
 
+zipcodes = {
+    'The Wedge': '92663', 
+    'Corona Del Mar': '92625', 
+    'Newport Point': '92625', 
+    'Blackies': '92663',
+    'Newport Lower Jetties': '92663',
+    'Crystal Cove': '92651',
+    'Newport Upper Jetties': '92663',
+    'River Jetties': '92646',
+    'Crescent Bay': '92651',
+    'Rockpile': '92651',
+    'Huntington State Beach': '92646',
+    'Thalia Street': '92651',
+    'Brooks Street': '92651',
+    'Huntington St.': '92648',
+    'Agate Street': '92651',
+    'Huntington Beach Pier Southside': '92648',
+    'North HB': '92615',
+    'Aliso Creek': '92651',
+    'HB Cliffs': '92646'
+     }
+
+
+def get_zip(beach_name):
+    return zipcodes[beach_name]
+
+
 def get_beach_id(name_beach):
     if name_beach in beaches:
         return beaches[name_beach]
@@ -78,7 +105,6 @@ def return_power(name_beach: str, user_time: str):
         if wave.power > max_power:
             max_power = wave.power
     dataframe = timestamp_power_data(spot_forecasts)
-    print(dataframe)
     lower_power, upper_power = get_power_range_for_time(dataframe, user_time)
 
     return lower_power, upper_power
@@ -108,15 +134,3 @@ def rank_beach(beach_name: str, user_time_input):
 
     level = beach_ranking(power)
     return level
-
-# for beach in beaches:
-#     max_power, swell_avg = return_power(beach)
-#     print(beach, max_power, swell_avg)
-
-# beach_id = get_beach_id("Corona Del Mar")
-# testforecast = pysurfline.get_spot_forecasts(spotId=beach_id, days=1)
-
-
-user_time = "2024-11-03 22:00:00"
-print(return_power("Corona Del Mar", user_time))
-

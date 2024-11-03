@@ -7,9 +7,11 @@ import beaches
 import random
 import pysurfline
 
+from beaches import get_zip
 from weatherapi import pull_data
 from fastapi import FastAPI
 
+APIKEY = "a0a0e8d9da8256bbec2e9eb46469f08b"
 # The app which manages all of the API routes
 app = FastAPI()
 
@@ -56,7 +58,26 @@ def get_tides(beach_name: str):
     spotforecasts = pysurfline.get_spot_forecasts(spotId)
     return spotforecasts.tides
 
-@app.get("/weather-data")
-def get_basic_weather(zipcode):
-    apikey = "a0a0e8d9da8256bbec2e9eb46469f08b"
-    return pull_data(zipcode, apikey)
+@app.get("/weather-temps")
+def get_temps(beach_name):
+    zipcode = get_zip(beach_name)
+    point = pull_data(zipcode, APIKEY)
+    return point['temp_now'], point['temp_min'], point['temp_max']
+
+@app.get("/sea-level")
+def get_sea_level(beach_name):
+    zipcode = get_zip(beach_name)
+    point = pull_data(zipcode, APIKEY)
+    return point['sea_level']
+
+@app.get("/humidity")
+def get_humidity(beach_name):
+    zipcode = get_zip(beach_name)
+    point = pull_data(zipcode, APIKEY)
+    return point['humidity']
+
+@app.get("/weather-desc")
+def get_weather_description(beach_name):
+    zipcode = get_zip(beach_name)
+    point = pull_data(zipcode, APIKEY)
+    return point['desc']
