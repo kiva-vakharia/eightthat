@@ -86,10 +86,21 @@ class OpenWeather(WebAPI):
         self.latitude = obj['coord']['lat']
         self.description = obj['weather'][0]['description']
         self.humidity = obj['main']['humidity']
+        self.sea_level = obj['main']['sea_level']
         self.city = obj['name']
         self.sunset = obj['sys']['sunset']
         return obj
 
-weather = OpenWeather(zipcode="92697", apikey='a0a0e8d9da8256bbec2e9eb46469f08b')
-weather.load_data()
-print(weather.temperature)
+
+def pull_data(zip, key):
+    weather = OpenWeather(zipcode=zip, apikey=key)
+    weather.load_data()
+    return_obj = {}
+    return_obj['city'] = weather.city
+    return_obj['temp_min'] = weather.low_temperature
+    return_obj['temp_max'] = weather.high_temperature
+    return_obj['desc'] = weather.description
+    return_obj['sea_level'] = weather.sea_level
+    return_obj['humidity'] = weather.humidity
+
+    return return_obj

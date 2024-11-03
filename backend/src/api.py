@@ -3,10 +3,11 @@ This file defines the FastAPI app for the API and all of its routes.
 To run this API, use the FastAPI CLI
 $ fastapi dev src/api.py
 """
-
+import beaches
 import random
 import pysurfline
 
+from weatherapi import pull_data
 from fastapi import FastAPI
 
 # The app which manages all of the API routes
@@ -46,7 +47,16 @@ def get_random_item() -> dict[str, int]:
 
 
 @app.get("/tide-data")
-def get_tides():
-    spotId = "5842041f4e65fad6a7708cfd" # anchor point
+def get_tides(beach_name: str):
+    spotId =  beaches.get_beach_id(beach_name)
+    print(spotId)
+
+    if not(spotId):
+        return "Not a beach nearby"
     spotforecasts = pysurfline.get_spot_forecasts(spotId)
     return spotforecasts.tides
+
+@app.get("/weather-data")
+def get_basic_weather(zipcode):
+    apikey = "a0a0e8d9da8256bbec2e9eb46469f08b"
+    return pull_data(zipcode, apikey)

@@ -30,10 +30,12 @@ function Beach() {
 
 	return (
 		<>
+		BEACH!!!!!!!
 			{tides && (
+				<div style={{width: "800px", height: "500px"}}>
 				<Line
 					data={{
-						labels: tides.map((t) => new Date(t.timestamp.dt).toISOString()),
+						labels: tides.map((t) => new Date(t.timestamp.dt).toLocaleString('en-US', )),
 						datasets: [
 							{
 								label: "Tides",
@@ -56,6 +58,7 @@ function Beach() {
 						},
 					}}
 				/>
+				</div>
 			)}
 		</>
 	);
