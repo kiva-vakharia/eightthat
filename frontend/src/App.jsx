@@ -46,6 +46,9 @@ function App() {
 				{beachNames.map((beach) => (
 					<option key={beach}> {beach}</option>
 				))}
+				<option key="." selected>
+					...
+				</option>
 			</select>
 		</>
 	);
